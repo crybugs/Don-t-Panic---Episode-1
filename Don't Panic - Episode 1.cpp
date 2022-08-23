@@ -27,6 +27,7 @@ int main()
     // number of elevators
     int nb_elevators;
     scanf("%d%d%d%d%d%d%d%d", &nb_floors, &width, &nb_rounds, &exit_floor, &exit_pos, &nb_total_clones, &nb_additional_elevators, &nb_elevators);
+    int n = 0;
     for (int i = 0; i < nb_elevators; i++) {
         // floor on which this elevator is found
         int elevator_floor;
@@ -44,11 +45,26 @@ int main()
         // direction of the leading clone: LEFT or RIGHT
         char direction[11];
         scanf("%d%d%s", &clone_floor, &clone_pos, direction);
-
+        int init = clone_pos;
         // Write an action using printf(). DON'T FORGET THE TRAILING \n
         // To debug: fprintf(stderr, "Debug messages...\n");
-        fprintf(stderr, "%d",exit_pos);
-        printf("WAIT\n"); // action: WAIT or BLOCK
+        printf("WAIT\n");
+        while(n==0){
+            if (exit_pos-clone_pos<0){
+                printf("BLOCK\n");
+                n+=1;
+            } 
+        }
+        while(exit_pos-clone_pos>=0){
+            if (exit_pos-clone_pos>0){
+                printf("WAIT\n");
+            }
+            else{
+                printf("BLOCK\n");
+            }
+        }
+        
+        
     }
 
     return 0;
