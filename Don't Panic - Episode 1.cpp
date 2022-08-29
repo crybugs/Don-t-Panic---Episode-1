@@ -29,12 +29,12 @@ int main()
     int elevators[100]={};
     scanf("%d%d%d%d%d%d%d%d", &nb_floors, &width, &nb_rounds, &exit_floor, &exit_pos, &nb_total_clones, &nb_additional_elevators, &nb_elevators);
     int n = 0;
+    int m = 0;
     for (int i = 0; i < nb_elevators; i++) {
         // floor on which this elevator is found
         int elevator_floor;
         // position of the elevator on its floor
         int elevator_pos;
-        
         scanf("%d%d", &elevator_floor, &elevator_pos);
         elevators[elevator_floor]=elevator_pos;
         fprintf(stderr,"%d",elevator_pos);
@@ -53,42 +53,34 @@ int main()
         char direction[11];
         scanf("%d%d%s", &clone_floor, &clone_pos, direction);
         int init = clone_pos;
-        int n = 0;
-        int m = clone_floor;
         fprintf(stderr,"%d",m);
         // Write an action using printf(). DON'T FORGET THE TRAILING \n
         // To debug: fprintf(stderr, "Debug messages...\n");
         
-        while(clone_pos!=width){
-            fprintf(stderr,"%d",elevators[1]);
-            if(clone_pos==elevators[1]){
+        if(clone_pos-elevators[clone_floor]<0){
+            printf("WAIR\n");
+            printf("BLOCK\n");
+        }
+        printf("WAIT\n");
+        while(n==0){
+            if (exit_pos-clone_pos<0 && clone_floor==exit_floor){
                 printf("WAIT\n");
                 printf("BLOCK\n");
+                n+=1;
+            } 
+            else{
+                break;
             }
-            printf("WAIT\n");
-            if (clone_floor==exit_floor&&clone_pos==exit_pos){
+        }
+        while(exit_pos-clone_pos>=0 && clone_floor==exit_floor){
+            if (exit_pos-clone_pos>0){
+                printf("WAIT\n");
+            }
+            else{
                 printf("BLOCK\n");
             }
-            while(n==0){
-                if (exit_pos-clone_pos<0 && clone_floor==exit_floor){
-                    printf("WAIT\n");
-                    printf("BLOCK\n");
-                    n+=1;
-                } 
-                else{
-                    break;
-                }
-            }
-            while(exit_pos-clone_pos>=0 && clone_floor==exit_floor){
-                if (exit_pos-clone_pos>0){
-                    printf("WAIT\n");
-                }
-                else{
-                    printf("BLOCK\n");
-                }
         }
         
-        }
 
 
         
