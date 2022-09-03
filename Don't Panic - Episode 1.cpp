@@ -39,6 +39,7 @@ int main()
         elevators[elevator_floor]=elevator_pos;
         fprintf(stderr,"%d",elevator_pos);
     }
+    int c = 0;
     
     
     
@@ -52,38 +53,32 @@ int main()
         // direction of the leading clone: LEFT or RIGHT
         char direction[11];
         scanf("%d%d%s", &clone_floor, &clone_pos, direction);
-        int init = clone_pos;
         fprintf(stderr,"%d",m);
         // Write an action using printf(). DON'T FORGET THE TRAILING \n
         // To debug: fprintf(stderr, "Debug messages...\n");
-        
-        if(clone_pos-elevators[clone_floor]<0){
-            printf("WAIR\n");
-            printf("BLOCK\n");
+        if(elevators[clone_floor]-clone_pos>0){
+            printf("WAIT\n");
         }
-        printf("WAIT\n");
-        while(n==0){
+        else if(elevators[clone_floor]==clone_pos){
+            printf("WAIT\n");
+        }
+        if(n==0){
             if (exit_pos-clone_pos<0 && clone_floor==exit_floor){
-                printf("WAIT\n");
                 printf("BLOCK\n");
                 n+=1;
             } 
-            else{
-                break;
+        }
+        if(c==1){
+            if(exit_pos-clone_pos<0 && clone_floor==exit_floor){
+                printf("WAIT\n");
             }
         }
-        while(exit_pos-clone_pos>=0 && clone_floor==exit_floor){
+        if(exit_pos-clone_pos>=0 && clone_floor==exit_floor){
             if (exit_pos-clone_pos>0){
                 printf("WAIT\n");
             }
-            else{
-                printf("BLOCK\n");
-            }
         }
-        
-
-
-        
+        c=1;
     }
 
     return 0;
