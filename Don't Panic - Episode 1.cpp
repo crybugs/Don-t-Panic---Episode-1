@@ -62,14 +62,26 @@ int main()
         else if(elevators[clone_floor]==clone_pos){
             printf("WAIT\n");
         }
+        if(c==0){
+            if (elevators[clone_floor]-clone_pos<0){
+                printf("BLOCK\n");
+                c+=1;
+            } 
+        }
+        else{
+            if(elevators[clone_floor]-clone_pos<0){
+                printf("WAIT\n");
+            }
+        }
+
         if(n==0){
             if (exit_pos-clone_pos<0 && clone_floor==exit_floor){
                 printf("BLOCK\n");
                 n+=1;
             } 
         }
-        if(c==1){
-            if(exit_pos-clone_pos<0 && clone_floor==exit_floor){
+        else{
+            if(exit_pos-clone_pos<=0 && clone_floor==exit_floor){
                 printf("WAIT\n");
             }
         }
@@ -78,8 +90,10 @@ int main()
                 printf("WAIT\n");
             }
         }
-        c=1;
+    c = 1;
     }
 
     return 0;
 }
+
+//還在嘗試第三關，他比較複雜
