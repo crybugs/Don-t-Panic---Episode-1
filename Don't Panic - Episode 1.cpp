@@ -40,6 +40,7 @@ int main()
         fprintf(stderr,"%d",elevator_pos);
     }
     int c = 0;
+    int p = 0;
     
     
     
@@ -56,44 +57,66 @@ int main()
         fprintf(stderr,"%d",m);
         // Write an action using printf(). DON'T FORGET THE TRAILING \n
         // To debug: fprintf(stderr, "Debug messages...\n");
-        if(elevators[clone_floor]-clone_pos>0){
-            printf("WAIT\n");
-        }
-        else if(elevators[clone_floor]==clone_pos){
-            printf("WAIT\n");
-        }
-        if(c==0){
-            if (elevators[clone_floor]-clone_pos<0){
+        if (elevators[clone_floor]-clone_pos<0){
+            if (p==1){
+                printf("WAIT\n");
+            }
+            else if(p==0){
                 printf("BLOCK\n");
-                c+=1;
-            } 
+                if (p==0){
+                    p=1;
+                }
+                else{
+                    p=0;
+                }
+            }
+        } 
+        else if(elevators[clone_floor]-clone_pos>0){
+            if (p==0){
+                printf("WAIT\n");
+            }
+            else if(p==1){
+                printf("BLOCK\n");
+                if (p==0){
+                    p=1;
+                }
+                else{
+                    p=0;
+                }
+            }
         }
         else{
-            if(elevators[clone_floor]-clone_pos<0){
+            printf("WAIT\n");
+        }
+        if (exit_pos-clone_pos<0 && clone_floor==exit_floor){
+            if (p==1){
                 printf("WAIT\n");
             }
-        }
-
-        if(n==0){
-            if (exit_pos-clone_pos<0 && clone_floor==exit_floor){
+            else if (p==0){
                 printf("BLOCK\n");
-                n+=1;
-            } 
-        }
-        else{
-            if(exit_pos-clone_pos<=0 && clone_floor==exit_floor){
+                if (p==0){
+                    p=1;
+                }
+                else{
+                    p=0;
+                }
+            }
+        } 
+        if(exit_pos-clone_pos>0 && clone_floor==exit_floor){
+            if (p==0){
                 printf("WAIT\n");
             }
-        }
-        if(exit_pos-clone_pos>=0 && clone_floor==exit_floor){
-            if (exit_pos-clone_pos>0){
-                printf("WAIT\n");
+            else if (p==1){
+                printf("BLOCK\n");
+                if (p==0){
+                    p=1;
+                }
+                else{
+                    p=0;
+                }
             }
         }
-    c = 1;
     }
 
     return 0;
 }
-
-//還在嘗試第三關，他比較複雜
