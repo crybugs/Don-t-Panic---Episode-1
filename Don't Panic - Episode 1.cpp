@@ -102,7 +102,7 @@ int main()
                 }
             }
         } 
-        if(exit_pos-clone_pos>0 && clone_floor==exit_floor){
+        else if(exit_pos-clone_pos>0 && clone_floor==exit_floor){
             if (p==0){
                 printf("WAIT\n");
             }
@@ -120,3 +120,4 @@ int main()
 
     return 0;
 }
+//用方向去判斷，但是還找不到原因
